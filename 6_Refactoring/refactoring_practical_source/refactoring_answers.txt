@@ -1,0 +1,65 @@
+(i) The statement method in the main.java.Customer class is too long and more complicated than it needs to be.
+The cost of the rental vehicle should not be calculated in the main.java.Customer class. This is beyond the scope of that class.
+This method should be broken up into multiple methods, for simplicity
+There are many comments in the statement method, this shows that the method is too complicated. A method that
+The getTitle method, in the main.java.Vehicles.Vehicle class is named incorrectly, as its returning a model object it should be named getModel
+The law of demeter principle is broken in the statement method in the switch statement.
+In the test Class the the expected string was misspelled, so the test cases firstly failed
+The vehicle types in the main.java.Vehicles.Vehicle class are static ints and should be enums.
+
+ii) Both classes are acting like data classes. In order to fix these you should use the remove setting method on any
+field that should not be changed setVehicle. Check where we use getters and setter in the main.java.Customer class and bring that
+functionality up to the main.java.Vehicles.Vehicle or main.java.Rental classes.
+
+iii) The main.java.Customer statement should not figure out the cost of the rental, that should be handled by rental. The method is too
+long also. The method also has too many comments, meaning it's too complicated to understand by just reading the code. The switch
+statement could be changed to use polymorphism, so to use each of the vehicles as subclass. The main.java.Customer class is acting as
+a God class, as its performing all the functionality.
+
+iv) The main.java.Customer class should be refactored and broken up. It holds all the functionality of the entire program and the
+main.java.Vehicles.Vehicle and main.java.Rental classes act as Data classes and nothing else. Some of that functionality should be brought up to the Data
+classes so that the law of demeter is no longer violated.
+
+v) The switch statement is performing all of the functionality for when the vehicle type is of a certain type. To reduce the
+complexity of this, we should use polymorphism. So create multiple sub-classes for the vehicles and move all the
+functionality from the switch statement to the subclasses. The main.java.Vehicles.Vehicle would be an abstract class and the subclasses would
+share some methods.
+
+vi) Yes, the code block calculates the amount needed to pay for the vehicle rented based on the type and days rented.
+
+vii) That should not be extracted as we will be updating this value multiple times. The for loop calculates all rentals
+so we will updating this value multiple times for all the rentals. So the value should not be extracted as it will be updated
+from the returning newAmount from the function.
+
+viii) The code does change one single variable, so it would be appropriate to extract this method.
+
+ix) The days rented should be passed to the new method as to calculate the amount correctly.
+
+x) The IDE's refactoring is not as effective as doing it by hand as it didnt apply polymorphism to the vehicle sub-classes,
+it simply moved the switch statement to a new method, which does simplify the overall method but the new method still suffers
+from that code smell, which i corrected by adding the vehicles subclasses, also the functionality of calculating the amount
+owed is still being calculated in main.java.Customer, which should not happen and i moved that to happen at each of the subclasses.
+
+xi) Trying out the extract method on other parts of the code, shows that it doesnt work that great. This is because when
+we select to extract a certain functionality, the scope of changes is in just that highlighted area, which is not ideal, as
+more structural changes are needed to make refactoring worthwhile eg. switch statement. The freqRentalPoints extraction method
+is moved outside the statement method, but its still in the main.java.Customer class, which this should be handled in the main.java.Rental class.
+
+xii) I prefer to keep the delegated method. In my opinion this is useful as this delegate method just forwards the
+the method call to the new function and this might be useful if some clients use the "old" way of calling this
+method and this way will still work without changing how the client calls the new method. Another reason you might
+want to keep the delegated method is if the original class provides a high level abstraction, which you might want
+to keep. I however i removed the delegated method, as to not have code duplication, i have a reference to that new class
+from the old method, so clients using the old method, will still work, without having code duplication.
+
+xiii) After refactoring all my testcases passed like expected, so we succeeded in changing the location of the envy
+method to that class, without altering the code functionality. I would not add any new testcases now as the functionality
+is exactly the same as before.
+
+xiv) I renamed the method from "statement" to "generateStatement", as its a more accurate description of what this
+method is trying to achieve. Comments are not needed here so i would delete them. The code here is fairly simple
+and simple to follow, so the developer will know what its doing without the need to explain the code more. Having
+many comments often means the code you have written is too complicated and should be re-written, so that developers
+can glance at the code and understand what its doing. Another reason to not include them (or to try avoid them) is
+that when code is updated, comments are often overlooked and then comments serve the opposite purpose, complicating
+the code more. Reading code should be enough to understand what its doing, if that's not the case....Refactor!
